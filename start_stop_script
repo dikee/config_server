@@ -2,7 +2,7 @@ case $1 in
    start)
        # source /home
        # Launch your program as a detached process
-       /home/ec2-user/pypiserver/venv-pypi/bin/python /home/ec2-user/pypiserver/venv-pypi/bin/pypi-server -p 8080 /home/ec2-user/pypiserver/packages/ & 
+       /home/ec2-user/this_process/venv-this_process/bin/python /home/ec2-user/this_process/venv-this_process/bin/this_process -p 8080 /home/ec2-user/this_process/packages/ & 
        # Get its PID and store it
        THE_PID=$!
        sudo echo $THE_PID > ${PIDFILE}
@@ -12,9 +12,9 @@ case $1 in
       sudo kill -9 `cat ${PIDFILE}`
       # Now that it's killed, don't forget to remove the PID file
       sudo rm ${PIDFILE}
-      echo "Service Stopped PyPiServer `cat ${PIDFILE}`"
+      echo "Service Stopped this_process `cat ${PIDFILE}`"
    ;;
    *)
-      echo "usage: nrg-pypiserver {start|stop}" ;;
+      echo "usage: this_process {start|stop}" ;;
 esac
 exit 0
