@@ -1,7 +1,7 @@
 # Sets up directory with python 2.7, python 3.3, pip, virtualenv, development tools, and mongodb
 
-/usr/sbin/adduser demouser
-echo "nigeria" | passwd demouser --stdin
+/usr/sbin/adduser {{username}}
+echo "{{password}}" | passwd demouser --stdin
 # Add user to wheel root group
 gpasswd -a demouser wheel
 echo "PermitRootLogin no" >> /etc/ssh/sshd_config
@@ -9,6 +9,7 @@ echo "AllowUsers demouser" >> /etc/ssh/sshd_config
 service sshd reload
 
 # Install python
+echo "Install Python\n"
 yum -y update
 yum groupinstall -y "development tools"
 yum install -y zlib-dev openssl-devel sqlite-devel bzip2-devel
@@ -36,6 +37,9 @@ python2.7 setup.py install
 curl https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py | python2.7 -
 pip install virtualenv
 
+echo "Python Install Complete\n"
+
+echo "Install Mongo \n"
 # Install Mongo
 cat > /etc/yum.repos.d/mongodb.repo <<- EOM
 [mongodb]
@@ -47,4 +51,5 @@ EOM
 
 yum -y install mongo-10gen mongo-10gen-server
 service mongod start
+echo "Install Mongo Complete\n"
 
